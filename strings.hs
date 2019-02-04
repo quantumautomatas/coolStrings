@@ -13,9 +13,9 @@ glue (a:xs) ys = a : (glue xs ys)
 {- Reverse -}
 rev :: String -> String
 rev [] = []
-rev (a:xs) = (rev xs) ++ [a]
+rev (a:xs) = glue (rev xs) [a]
 
-{- nth character of a String -}
+{- nth character of a string -}
 pos :: String -> Int -> Char
 pos [] _ = error("the string is not long enough")
 pos (a:_) 0 = a
@@ -48,7 +48,7 @@ sub xs = unique (squash [suf x | x <- (pref xs)])
 
 {- Some other miselaneous auxliar functions-}
 
-{- squash a list of list of strings into a list of strings-}
+{- squash a list of list of elements into a list of elements-}
 squash :: (Show a) => [[a]] -> [a]
 squash [] = []
 squash (a:xs) = a ++ (squash xs)
